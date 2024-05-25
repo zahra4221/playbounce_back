@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Message de Contact PlayBounce</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .header { background-color: #f2f2f2; padding: 10px; text-align: center; }
+        .content { margin: 20px; padding: 20px; background-color: #fff; border: 1px solid #ddd; }
+        .footer { text-align: center; padding: 10px; background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Vous avez reçu un nouveau message pour le complexe PlayBounce</h1>
+    </div>
+    <div class="content">
+        <p><strong>Prénom :</strong> {{prenom}}</p>
+        <p><strong>Email :</strong> {{email}}</p>
+        <p><strong>Message :</strong></p>
+        <p>{{message}}</p>
+    </div>
+    <div class="footer">
+        <p>Merci de traiter cette demande dans les plus brefs délais</p>
+    </div>
+</body>
+</html>
