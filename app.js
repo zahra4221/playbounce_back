@@ -37,11 +37,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', contactRoutes);
+app.get('/', (req, res) => {
+  res.send('Server is running');
+});
+
 app.use('/api/auth', userRoutes);
 app.use('/api/matchs', matchRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reserve', reservationRoutes);
 app.use('/api/trainingReservations', trainingReservationRoutes);
+app.use('/api/contact', contactRoutes);
 
 module.exports = app;
