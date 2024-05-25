@@ -11,15 +11,14 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Middleware pour servir les fichiers statiques du dossier 'uploads'
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const userRoutes = require('./routes/user');
 const matchRoutes = require('./routes/matchRoutes');
 const adminRoutes = require('./routes/admin');
 const reservationRoutes = require('./routes/reservationRoutes');
-const trainingReservationRoutes = require('./routes/trainingReservationRoutes'); // Ajouté
-const contactRoutes = require('./routes/contactRoutes')
+const trainingReservationRoutes = require('./routes/trainingReservationRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -37,11 +36,12 @@ app.use((req, res, next) => {
   );
   next();
 });
+
 app.use('/', contactRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/api/matchs', matchRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/reserve', reservationRoutes);
-app.use('/api/trainingReservations', trainingReservationRoutes); // Ajouté
+app.use('/api/trainingReservations', trainingReservationRoutes);
 
 module.exports = app;
