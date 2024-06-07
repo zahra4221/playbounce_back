@@ -1,6 +1,5 @@
 const Match = require('../models/Match');
 
-// Ajoutez un match
 exports.addMatch = (req, res, next) => {
   const { sport, team1, team2, date, location } = req.body;
   const team1Logo = req.files['team1Logo'] ? `uploads/${req.files['team1Logo'][0].filename}` : null;
@@ -22,14 +21,19 @@ exports.addMatch = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
-// Obtenir tous les matchs
 exports.getAllMatchs = (req, res, next) => {
   Match.find()
     .then(matchs => res.status(200).json(matchs))
     .catch(error => res.status(400).json({ error }));
 };
 
-// In your Match controller
+exports.deleteMatch = (req, res, next) => {
+  Match.findByIdAndDelete(req.params.id)
+    .then(() => res.status(200).json({ message: 'Match supprimé !' }))
+    .catch(error => res.status(400).json({ error }));
+};
+
+
 exports.updateScore = async (req, res) => {
   try {
     const match = await Match.findById(req.params.id);
@@ -45,7 +49,6 @@ exports.updateScore = async (req, res) => {
   }
 };
 
-// Obtenir toutes les réservations de match
 exports.getAllReservations = (req, res, next) => {
   Match.find({}, 'reservations')
     .then(reservations => res.status(200).json(reservations))
@@ -80,9 +83,3 @@ exports.getUserMatchReservations = async (req, res, next) => {
   }
 };
 
-// Supprimer un match
-exports.deleteMatch = (req, res, next) => {
-  Match.findByIdAndDelete(req.params.id)
-    .then(() => res.status(200).json({ message: 'Match supprimé !' }))
-    .catch(error => res.status(400).json({ error }));
-};

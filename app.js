@@ -26,7 +26,7 @@ const reservationRoutes = require('./routes/reservationRoutes');
 const trainingReservationRoutes = require('./routes/trainingReservationRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DATABASE_URL)
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch((error) => console.log('Connexion à MongoDB échouée !', error));
 

@@ -5,9 +5,9 @@ const router = express.Router();
 router.post('/contact', async (req, res) => {
   try {
     const { prenom, email, message } = req.body;
-    console.log('Prénom:', prenom);  // Debug: Vérifiez les données reçues
-    console.log('Email:', email);
-    console.log('Message:', message);
+    // console.log('Prénom:', prenom);  
+    // console.log('Email:', email);
+    // console.log('Message:', message);
 
     await sendContactEmail({ prenom, email, message });
     res.status(200).json({ message: 'Email envoyé avec succès' });

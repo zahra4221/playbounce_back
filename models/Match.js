@@ -12,9 +12,9 @@ const ReservationSchema = new Schema({
 const MatchSchema = new Schema({
   sport: { type: String, required: true },
   team1: { type: String, required: true },
-  team1Logo: { type: String }, // Nouveau champ pour le logo de l'équipe 1
+  team1Logo: { type: String }, 
   team2: { type: String, required: true },
-  team2Logo: { type: String }, // Nouveau champ pour le logo de l'équipe 2
+  team2Logo: { type: String }, 
   date: { type: Date, required: true },
   location: { type: String, required: true },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },

@@ -1,18 +1,14 @@
-// Importation des modules nécessaires
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userAuthToken = process.env.ZAHRA_SECRET_TOKEN;
 
-// Fonction pour s'inscrire
 exports.signup = (req, res, next) => {
-  // Vérification du format de l'adresse e-mail
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(req.body.email)) {
     return res.status(400).json({ error: "Adresse e-mail invalide !" });
   }
 
-  // Vérification de la longueur et de la complexité du mot de passe
   const passwordRegex =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
   if (!passwordRegex.test(req.body.password)) {
@@ -23,25 +19,23 @@ exports.signup = (req, res, next) => {
   }
 
   bcrypt
-    .hash(req.body.password, 10) // Hashage du mot de passe avec un coût de 10
+    .hash(req.body.password, 10) 
     .then((hash) => {
-      // Création d'un nouvel utilisateur avec les informations fournies
       const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         birthDate: req.body.birthDate,
         email: req.body.email,
         password: hash,
-        role: req.body.role || 'user', // Assigner le rôle, par défaut 'user'
+        role: req.body.role || 'user', 
       });
       user
-        .save() // Enregistrement de l'utilisateur dans la base de données
+        .save() 
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
         .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));
 };
-// Fonction pour se connecter
 exports.login = (req, res, next) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(req.body.email)) {
@@ -76,7 +70,7 @@ exports.login = (req, res, next) => {
             res.status(200).json({
               userId: user._id,
               token: token,
-              role: user.role, // Retourner le rôle de l'utilisateur
+              role: user.role, 
             });
           })
           .catch((error) => res.status(500).json({ error }));

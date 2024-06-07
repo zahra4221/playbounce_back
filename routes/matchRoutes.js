@@ -4,7 +4,6 @@ const matchController = require('../controllers/matchController');
 const upload = require('../middlewares/multer');
 const auth = require('../middlewares/auth');
 
-// Ajouter un match avec les fichiers téléchargés
 router.post('/add', auth, upload.fields([{ name: 'team1Logo', maxCount: 1 }, { name: 'team2Logo', maxCount: 1 }]), matchController.addMatch);
 
 router.get('/', matchController.getAllMatchs);
